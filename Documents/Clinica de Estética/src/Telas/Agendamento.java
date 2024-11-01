@@ -4,8 +4,17 @@
  */
 package Telas;
 
+import dao.AgendamentoDao;
+import dao.CadastroDao;
 import dao.ServicosDao;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import javax.swing.table.DefaultTableModel;
+import models.AgendamentoModel;
+import models.CadastroModel;
+import models.ServicosModel;
 
 /**
  *
@@ -40,14 +49,14 @@ public class Agendamento extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TabelaAgendamento = new javax.swing.JTable();
         testarSQL = new javax.swing.JButton();
         CampoHorario = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
         CampoData = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         CampoNome = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        CampoServico = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -127,7 +136,7 @@ public class Agendamento extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(153, 153, 153));
         jLabel11.setText("CPF");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaAgendamento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -143,14 +152,14 @@ public class Agendamento extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
+        jScrollPane1.setViewportView(TabelaAgendamento);
+        if (TabelaAgendamento.getColumnModel().getColumnCount() > 0) {
+            TabelaAgendamento.getColumnModel().getColumn(0).setResizable(false);
+            TabelaAgendamento.getColumnModel().getColumn(1).setResizable(false);
+            TabelaAgendamento.getColumnModel().getColumn(2).setResizable(false);
+            TabelaAgendamento.getColumnModel().getColumn(3).setResizable(false);
+            TabelaAgendamento.getColumnModel().getColumn(4).setResizable(false);
+            TabelaAgendamento.getColumnModel().getColumn(5).setResizable(false);
         }
 
         testarSQL.setBackground(new java.awt.Color(153, 153, 153));
@@ -172,7 +181,6 @@ public class Agendamento extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        CampoHorario.setText("  :  ");
 
         jLabel3.setBackground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Data de Agendamento");
@@ -183,15 +191,11 @@ public class Agendamento extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        CampoData.setText("  /  /    ");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setText("Agendamento de Clientes");
 
         CampoNome.setBackground(new java.awt.Color(153, 153, 153));
-        CampoNome.setSelectedIndex(-1);
-
-        jComboBox1.setSelectedIndex(-1);
 
         jLabel6.setText("Serviço");
 
@@ -236,7 +240,7 @@ public class Agendamento extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CampoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -258,7 +262,7 @@ public class Agendamento extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CampoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(CampoServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
@@ -290,23 +294,55 @@ public class Agendamento extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //vo arruma depois
     private void butaoCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butaoCadastrarMouseClicked
-        // TODO add your handling code here:
-        String vSN = "";
-        if(this.butaoLimpar.isSelected()){
-            vSN = "SIM";
-        } else{
-            vSN = "NÃO";
-        }
-        JOptionPane.showMessageDialog(null, "Agendamento criado:"+ "\n" +
-                "Cadastro efetuado:"+ "\n" +
-                "ID: " + CampoNome.getSelectedItem() + "\n" +
-                "Nome: " + CampoID.getText() + "\n" +
-                "Telefone: " + CampoTelefone.getText() + "\n" +
-                "CPF: " + CampoCPF.getText() + "\n" +
-                "Data: " + CampoData.getText() + "\n" +
-                "Horario: " + CampoHorario.getText() + "\n");
+       if((CampoNome.getText().trim().isEmpty()) || ((CampoQuantidade.getText().trim().isEmpty())|| CampoPreco.getText().trim().isEmpty()|| (CampoDesc.getText().trim().isEmpty()))){
+                   JOptionPane.showMessageDialog(null, "Nenhum dado idendificado");
+                   CampoNome.requestFocus();
+       }else{
+            if (contador == 0) {            
+                try{    
+                   modeloEstoque cadastroP = new modeloEstoque();
+                   
+                  cadastroP.setNomeProd(CampoNome.getText());
+                  cadastroP.setPreco(Float.parseFloat(CampoPreco.getText()));
+                  cadastroP.setQtdProd(Integer.parseInt(CampoQuantidade.getText()));   
+                  //cadastroP.setidCategoriaProduto(Integer.parseInt(CampoCategoria.getSelectedItem().toString()));  
+                  cadastroP.setDescProduto(CampoDesc.getText());     
+                  EstoqueDao cadastroPDao = new EstoqueDao();
+                  cadastroPDao.inserir(cadastroP); 
+                  limparTabela();
+                  atualizaTabela(cadastroPDao);
+                  JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!", "", INFORMATION_MESSAGE);
+                  limparCampos();
+                }
+                catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
+                } 
+            }else{
+                modeloEstoque cadastroP = new modeloEstoque();
+                cadastroP.setIdProd(Integer.parseInt(CampoID.getText()));
+                cadastroP.setNomeProd(CampoNome.getText());
+                cadastroP.setPreco(Float.parseFloat(CampoPreco.getText()));
+                cadastroP.setQtdProd(Integer.parseInt(CampoQuantidade.getText()));  
+                //cadastroP.setidCategoriaProduto(Integer.parseInt(CampoCategoria.getSelectedItem().toString()));
+                cadastroP.setDescProduto(CampoDesc.getText());
+
+                EstoqueDao cadastroPDao = new EstoqueDao();
+                cadastroPDao.alterar(cadastroP);
+                limparTabela();
+                atualizaTabela(cadastroPDao);
+                JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "", INFORMATION_MESSAGE);
+                CampoNome.requestFocus();
+                limparCampos();
+                
+                contador = 0;
+                TabelaEstoque.setVisible(true);
+                butaoCadastrar.setText("Cadastrar");                
+            }    
+
+       }
+       
     }//GEN-LAST:event_butaoCadastrarMouseClicked
 
     private void butaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoCadastrarActionPerformed
@@ -315,15 +351,21 @@ public class Agendamento extends javax.swing.JFrame {
 
     private void CampoCPFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CampoCPFKeyTyped
         // TODO add your handling code here:
-        if(evt.getExtendedKeyCode() == evt.VK_ENTER){
-            CampoCPF.requestFocus();
-        }
+        
     }//GEN-LAST:event_CampoCPFKeyTyped
 
     private void butaoLimparMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butaoLimparMouseClicked
         limparCampos();
     }//GEN-LAST:event_butaoLimparMouseClicked
-
+    
+    private void limparUser(){
+        CampoNome.removeAllItems();
+    }
+    
+    private void limparServico(){
+        CampoServico.removeAllItems();
+    }
+    
     private void limparCampos(){
         this.CampoNome.setSelectedIndex(-1);
         this.CampoID.setText("");
@@ -332,7 +374,75 @@ public class Agendamento extends javax.swing.JFrame {
         this.CampoData.setText("");
         this.CampoHorario.setText("");
     }
+  
+    private void limparTabela(){
+        //percorre a tabela e exclui todas as linhas
+        while(TabelaAgendamento.getRowCount() > 0){
+            DefaultTableModel dm = (DefaultTableModel) TabelaAgendamento.getModel();
+            dm.getDataVector().removeAllElements();
+        }
+    }
     
+    private void atualizaTabela(AgendamentoDao cadastroPDao){
+        try{
+                    limparTabela();
+
+                    ArrayList<AgendamentoModel> listaCadastros;
+                    listaCadastros = cadastroPDao.consultar();        
+                    DefaultTableModel modeloTabela = (DefaultTableModel) TabelaAgendamento.getModel();
+
+                    for (AgendamentoModel cadastroP : listaCadastros) {
+    modeloTabela.addRow(new String[]{
+        String.valueOf(cadastroP.getIdAgendamento()),
+        cadastroP.getNome(),
+        cadastroP.getCpf(),
+        cadastroP.getTelefone(),
+        cadastroP.getDataAgendamento(),
+        cadastroP.getHorario(),        // Incluindo o horário, caso seja necessário
+        String.valueOf(cadastroP.getIdServico()),
+        String.valueOf(cadastroP.getIdCliente())
+    });
+                    } 
+                }
+                catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
+                }
+     
+        }
+    
+    
+    private void atualizaTabelaUsers(CadastroDao DaoFunc){
+        try{
+              limparUser();
+              ArrayList<CadastroModel> listarFunc;
+              listarFunc = DaoFunc.consultar();
+
+              for(CadastroModel func : listarFunc){
+                  CampoNome.addItem(func.getNome());
+               }
+                    CampoNome.setSelectedIndex(-1);
+                    }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
+                    }
+                
+    }
+    
+    private void atualizaTabelaServicos(ServicosDao DaoFunc){
+        try{
+              limparServico();
+              ArrayList<ServicosModel> listarFunc;
+              listarFunc = DaoFunc.consultar();
+
+              for(ServicosModel func : listarFunc){
+                  CampoServico.addItem(func.getServico());
+               }
+                    CampoServico.setSelectedIndex(-1);
+                    }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
+                    }
+                
+    }
+
     private void butaoLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoLimparActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_butaoLimparActionPerformed
@@ -352,10 +462,14 @@ public class Agendamento extends javax.swing.JFrame {
     }//GEN-LAST:event_testarSQLActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        AgendamentoDao attagenda = new AgendamentoDao();
+        atualizaTabela(attagenda);
+        
         ServicosDao attServicos = new ServicosDao();
-        atualizaTabela(attServicos);
+        atualizaTabelaServicos(attServicos);
+        
         CadastroDao attUsers = new CadastroDao();
-        atualizaTabela(attUsers); //arrumar para q assim q entrar, o combobox com nomes cadastrados e serviços cadastrados
+        atualizaTabelaUsers(attUsers); 
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -399,10 +513,11 @@ public class Agendamento extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField CampoHorario;
     private javax.swing.JTextField CampoID;
     private javax.swing.JComboBox<String> CampoNome;
+    private javax.swing.JComboBox<String> CampoServico;
     private javax.swing.JTextField CampoTelefone;
+    private javax.swing.JTable TabelaAgendamento;
     private javax.swing.JButton butaoCadastrar;
     private javax.swing.JButton butaoLimpar;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -412,7 +527,6 @@ public class Agendamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton testarSQL;
     // End of variables declaration//GEN-END:variables
 }
