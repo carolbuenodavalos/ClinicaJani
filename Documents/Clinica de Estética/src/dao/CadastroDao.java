@@ -157,10 +157,7 @@ public class CadastroDao implements DaoGenerica<CadastroModel> {
     }
     public ArrayList<CadastroModel> consultar(String str) {
         ArrayList<CadastroModel> listaCadastrosStr = new ArrayList<CadastroModel>();
-        String sql = "SELECT c.idCliente, c.nomeCliente, c.cpfCliente, c.telCliente"+
-                     "FROM cliente as c "+
-                     "WHERE ( UPPER(c.nomeCliente like UPPER(?))) "+   
-                     "ORDER BY c.nomeCliente ";
+        String sql = "SELECT idCliente, nomeCliente, cpfCliente, telCliente FROM cliente WHERE UPPER(nomeCliente like UPPER(?)) ORDER BY idCliente";
         
         try
         {

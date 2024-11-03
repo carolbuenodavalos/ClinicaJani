@@ -48,7 +48,7 @@ public class Cadastro extends javax.swing.JFrame {
         butaoLimpar = new javax.swing.JButton();
         CampoID = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        campoBuscar = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -124,10 +124,15 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setText("Cadastro de Clientes");
 
-        jTextField4.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        campoBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        campoBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                campoBuscarActionPerformed(evt);
+            }
+        });
+        campoBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoBuscarKeyPressed(evt);
             }
         });
 
@@ -164,7 +169,7 @@ public class Cadastro extends javax.swing.JFrame {
                             .addComponent(CampoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)))
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -199,7 +204,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addGap(2, 2, 2)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(campoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -234,7 +239,35 @@ public class Cadastro extends javax.swing.JFrame {
         }
     }
     
-    
+        private void buscarNome(CadastroDao cadastroPDao)
+    {
+            try
+            {
+
+                limparTabela();
+
+                ArrayList<CadastroModel> listaUsuariosStr;
+                listaUsuariosStr = cadastroPDao.consultar(campoBuscar.getText()); 
+
+                //Resgata o modelo da tabela            
+                DefaultTableModel modeloTabela = (DefaultTableModel) TabelaUsuarios.getModel();
+
+                for(CadastroModel cadastroP : listaUsuariosStr)
+                {
+                    //adiciona em cada linha da tabela da tela o conteúdo de cada posição da listaCadastro
+                    modeloTabela.addRow(new String[]{Integer.toString(cadastroP.getID()), 
+                                                                      cadastroP.getNome(), 
+                                                                      cadastroP.getCPF(), 
+                                                                      cadastroP.getTel()});
+                }
+
+            }
+            catch(Exception ex)
+            {
+                JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
+            }
+      
+    }
     
     
     
@@ -298,14 +331,20 @@ public class Cadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_butaoLimparActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void campoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoBuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_campoBuscarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         CadastroDao attUsuarios = new CadastroDao();
         atualizaTabela(attUsuarios);
     }//GEN-LAST:event_formWindowOpened
+
+    private void campoBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBuscarKeyPressed
+        // TODO add your handling code here:
+        CadastroDao cadastroPDao = new CadastroDao();        
+        buscarNome(cadastroPDao);
+    }//GEN-LAST:event_campoBuscarKeyPressed
     
     private void limparCampos(){
         this.CampoID.setText("");
@@ -356,6 +395,7 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JTable TabelaUsuarios;
     private javax.swing.JButton butaoCadastrar;
     private javax.swing.JButton butaoLimpar;
+    private javax.swing.JTextField campoBuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -363,6 +403,5 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }
