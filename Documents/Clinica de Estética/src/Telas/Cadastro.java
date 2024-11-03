@@ -4,14 +4,21 @@
  */
 package Telas;
 
+import dao.CadastroDao;
+import dao.ServicosDao;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import javax.swing.table.DefaultTableModel;
+import models.CadastroModel;
 
 /**
  *
  * @author marcu
  */
 public class Cadastro extends javax.swing.JFrame {
-
+    int contador = 0;
     /**
      * Creates new form Cadastro
      */
@@ -45,6 +52,11 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("ID");
@@ -195,20 +207,83 @@ public class Cadastro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+        
+    private void atualizaTabela(CadastroDao cadastroPDao){
+        try{
+                   // limparTabela();
 
-    private void butaoCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butaoCadastrarMouseClicked
-        // TODO add your handling code here:
-        String vSN = "";
-        if(this.butaoLimpar.isSelected()){
-            vSN = "SIM";
-        } else{
-            vSN = "NÃO";
+                    ArrayList<CadastroModel> listaCadastros;
+                    listaCadastros = cadastroPDao.consultar();        
+                    DefaultTableModel modeloTabela = (DefaultTableModel) TabelaUsuarios.getModel();
+
+                    for(CadastroModel cadastroP : listaCadastros){
+                        modeloTabela.addRow(new String[]{Integer.toString(cadastroP.getID()),cadastroP.getNome(),cadastroP.getCPF(),cadastroP.getTel()});
+                    }
+
+                }
+                catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado na linha 275:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
+                }
+     
+    }
+            
+    private void limparTabela(){
+        while(TabelaUsuarios.getRowCount() > 0){
+            DefaultTableModel dm = (DefaultTableModel) TabelaUsuarios.getModel();
+            dm.getDataVector().removeAllElements();
         }
-        JOptionPane.showMessageDialog(null, "Cadastro efetuado:"+ "\n" +
-            "ID: " + CampoID.getText() + "\n" +
-            "Nome: " + CampoNome.getText() + "\n" +
-            "CPF: " + CampoCPF.getText() + "\n" +
-            "Telefone: " + CampoTelefone.getText() + "\n");
+    }
+    
+    
+    
+    
+    
+    
+    private void butaoCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butaoCadastrarMouseClicked
+         if(((CampoNome.getText().trim().isEmpty()))){
+            JOptionPane.showMessageDialog(null, "Nenhum dado idendificado");
+            CampoNome.requestFocus();
+        }else{
+            if (contador == 0) {
+                try{
+                    CadastroModel cadastroP = new CadastroModel();
+
+                    cadastroP.setNome(CampoNome.getText());
+                    cadastroP.setCPF(CampoCPF.getText());
+                    cadastroP.setTel(CampoTelefone.getText());
+                    
+                    CadastroDao cadastroPDao = new CadastroDao();
+                    cadastroPDao.inserir(cadastroP);
+                    limparTabela();
+                    atualizaTabela(cadastroPDao);
+                    JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso!", "", INFORMATION_MESSAGE);
+                    limparCampos();
+                }
+                catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", ERROR_MESSAGE);
+                }
+            }else{
+                CadastroModel cadastroP = new CadastroModel();
+                //cadastroP.setID(Integer.parseInt(CampoID.getText()));
+                cadastroP.setNome(CampoNome.getText());
+                cadastroP.setCPF(CampoCPF.getText());
+                cadastroP.setTel(CampoTelefone.getText());
+
+                ServicosDao cadastroPDao = new ServicosDao();
+                //cadastroPDao.alterar(cadastroP);
+                //limparTabela();
+                //atualizaTabela(cadastroPDao);
+                JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!", "", INFORMATION_MESSAGE);
+                //CampoServico.requestFocus();
+                limparCampos();
+
+                contador = 0;
+                //TabelaServicos.setVisible(true);
+                butaoCadastrar.setText("Cadastrar");
+            }
+
+        }
+      
     }//GEN-LAST:event_butaoCadastrarMouseClicked
 
     private void butaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butaoCadastrarActionPerformed
@@ -226,6 +301,11 @@ public class Cadastro extends javax.swing.JFrame {
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        CadastroDao attUsuarios = new CadastroDao();
+        atualizaTabela(attUsuarios);
+    }//GEN-LAST:event_formWindowOpened
     
     private void limparCampos(){
         this.CampoID.setText("");

@@ -122,9 +122,7 @@ public class CadastroDao implements DaoGenerica<CadastroModel> {
     public ArrayList<CadastroModel> consultar() {
         
         ArrayList<CadastroModel> listaCadastros = new ArrayList<CadastroModel>();
-        String sql = "SELECT c.idCliente, c.nomeCliente, c.cpfCliente, c.telCliente"+
-                     "FROM cliente as c "+
-                     "ORDER BY c.idCliente ";
+        String sql = "SELECT idCliente, nomeCliente, cpfCliente, telCliente FROM cliente ORDER BY idCliente";
         try
         {
             if(this.conexao.conectar())
