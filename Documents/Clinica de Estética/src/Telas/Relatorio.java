@@ -58,7 +58,7 @@ public class Relatorio extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID do agendamento", "Nome do Cliente", "Data", "Horario", "Serviço"
+                "ID do agendamento", "Nome do Cliente", "Data", "Horario"
             }
         ));
         jScrollPane1.setViewportView(TabelaRelatorio);
@@ -209,10 +209,9 @@ public class Relatorio extends javax.swing.JFrame {
     modeloTabela.addRow(new String[]{
         String.valueOf(cadastroP.getIdAgendamento()),
         cadastroP.getNome(),
-        cadastroP.getCpf(),
-        cadastroP.getTelefone(),
         cadastroP.getDataAgendamento(),
-        cadastroP.getHorario(),     
+        cadastroP.getHorario(),
+        cadastroP.getServico(),    
         String.valueOf(cadastroP.getIdServico()),
         String.valueOf(cadastroP.getIdCliente())
     });
