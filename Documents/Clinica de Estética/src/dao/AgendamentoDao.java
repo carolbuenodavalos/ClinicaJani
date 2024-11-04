@@ -30,7 +30,7 @@ public class AgendamentoDao implements DaoGenerica<AgendamentoModel>{
     
     @Override
     public void inserir(AgendamentoModel cadastro) {
-        String sql = "INSERT INTO agendamento (nome, cpf, telefone, horario, dataAgendamento) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO agendamento (nome, cpf, telefone, servico, horario, dataAgendamento) VALUES (?,?,?,?,?,?)";
         
         try{
  
@@ -40,8 +40,9 @@ public class AgendamentoDao implements DaoGenerica<AgendamentoModel>{
                 sentenca.setString(1,cadastro.getNome()); 
                 sentenca.setString(2,cadastro.getCpf());
                 sentenca.setString(3,cadastro.getTelefone()); 
-                sentenca.setString(4,cadastro.getHorario()); 
-                sentenca.setString(5,cadastro.getDataAgendamento());               
+                sentenca.setString(4,cadastro.getServico()); 
+                sentenca.setString(5,cadastro.getHorario()); 
+                sentenca.setString(6,cadastro.getDataAgendamento());               
                 sentenca.execute(); 
                 sentenca.close(); 
                 this.conexao.getConnection().close();
@@ -54,7 +55,7 @@ public class AgendamentoDao implements DaoGenerica<AgendamentoModel>{
 
     @Override
     public void alterar(AgendamentoModel cadastro) {
-        String sql = "UPDATE agendamento SET nome = ?, cpf = ?, telefone = ?, horario = ?, dataAgendamento = ? WHERE idAgendamento = ?";
+        String sql = "UPDATE agendamento SET nome = ?, cpf = ?, telefone = ?, servico = ?, horario = ?, dataAgendamento = ? WHERE idAgendamento = ?";
         
         try
         {
@@ -64,8 +65,10 @@ public class AgendamentoDao implements DaoGenerica<AgendamentoModel>{
                 sentenca.setString(1,cadastro.getNome()); 
                 sentenca.setString(2,cadastro.getCpf());
                 sentenca.setString(3,cadastro.getTelefone()); 
-                sentenca.setString(4,cadastro.getHorario()); 
-                sentenca.setString(5,cadastro.getDataAgendamento()); 
+                sentenca.setString(4,cadastro.getServico()); 
+                sentenca.setString(5,cadastro.getHorario()); 
+                sentenca.setString(6,cadastro.getDataAgendamento()); 
+                sentenca.setInt(7,cadastro.getIdAgendamento()); 
                 sentenca.execute();
                 sentenca.close();
                 this.conexao.getConnection().close();
@@ -141,10 +144,10 @@ public class AgendamentoDao implements DaoGenerica<AgendamentoModel>{
     }
     public ArrayList<AgendamentoModel> consultar(String str) {
         ArrayList<AgendamentoModel> listaCadastrosStr = new ArrayList<AgendamentoModel>();
-        String sql = "SELECT c.idAgendamento, c.nome, c.cpf, c.telefone, c.horario, c.dataAgendamento"+
-                     "FROM agendamento as c "+
-                     "WHERE ( UPPER(c.nome like UPPER(?))) "+   
-                     "ORDER BY c.nomeProduto";
+         String sql = "SELECT c.idAgendamento, c.nome, c.cpf, c.telefone, c.horario, c.dataAgendamento " +
+                 "FROM agendamento AS c " +
+                 "WHERE UPPER(c.nome) LIKE UPPER(?) " +
+                 "ORDER BY c.nome";
         
         try
         {

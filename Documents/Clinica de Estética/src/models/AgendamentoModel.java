@@ -17,9 +17,18 @@ public class AgendamentoModel {
     private String telefone;
     private String cpf;
     private String nome;
+    private String servico;
 
     public String getTelefone() {
         return telefone;
+    }
+
+    public String getServico() {
+        return servico;
+    }
+
+    public void setServico(String servico) {
+        this.servico = servico;
     }
 
     public void setTelefone(String telefone) {
