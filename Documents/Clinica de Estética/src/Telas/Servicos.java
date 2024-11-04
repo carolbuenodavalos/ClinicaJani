@@ -43,6 +43,7 @@ public class Servicos extends javax.swing.JFrame {
         TabelaServicos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         CampoProfissional = new javax.swing.JTextField();
+        jVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -118,6 +119,20 @@ public class Servicos extends javax.swing.JFrame {
             }
         });
 
+        jVoltar.setBackground(new java.awt.Color(255, 255, 255));
+        jVoltar.setForeground(new java.awt.Color(0, 51, 51));
+        jVoltar.setText("Voltar");
+        jVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jVoltarMouseClicked(evt);
+            }
+        });
+        jVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,7 +146,10 @@ public class Servicos extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(butaoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(jVoltar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,7 +173,9 @@ public class Servicos extends javax.swing.JFrame {
                     .addComponent(CampoServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CampoProfissional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jVoltar))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(116, 116, 116)
@@ -261,6 +281,17 @@ public class Servicos extends javax.swing.JFrame {
     private void CampoProfissionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoProfissionalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CampoProfissionalActionPerformed
+
+    private void jVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jVoltarMouseClicked
+        Inicio frameInicio = new Inicio();
+        frameInicio.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jVoltarMouseClicked
+
+    private void jVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVoltarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jVoltarActionPerformed
     
     private void limparCampos(){
         //this.CampoID.setText("");
@@ -337,5 +368,6 @@ public class Servicos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jVoltar;
     // End of variables declaration//GEN-END:variables
 }

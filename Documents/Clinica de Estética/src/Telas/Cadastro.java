@@ -50,6 +50,7 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         campoBuscar = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        jVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -138,6 +139,20 @@ public class Cadastro extends javax.swing.JFrame {
 
         jLabel12.setText("Buscar");
 
+        jVoltar.setBackground(new java.awt.Color(255, 255, 255));
+        jVoltar.setForeground(new java.awt.Color(0, 51, 51));
+        jVoltar.setText("Voltar");
+        jVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jVoltarMouseClicked(evt);
+            }
+        });
+        jVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,7 +163,9 @@ public class Cadastro extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(butaoLimpar))
+                        .addComponent(butaoLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jVoltar))
                     .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +217,8 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(butaoLimpar))
+                    .addComponent(butaoLimpar)
+                    .addComponent(jVoltar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addGap(2, 2, 2)
@@ -345,6 +363,16 @@ public class Cadastro extends javax.swing.JFrame {
         CadastroDao cadastroPDao = new CadastroDao();        
         buscarNome(cadastroPDao);
     }//GEN-LAST:event_campoBuscarKeyPressed
+
+    private void jVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jVoltarMouseClicked
+        Inicio frameInicio = new Inicio();
+        frameInicio.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jVoltarMouseClicked
+
+    private void jVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVoltarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jVoltarActionPerformed
     
     private void limparCampos(){
         this.CampoID.setText("");
@@ -403,5 +431,6 @@ public class Cadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jVoltar;
     // End of variables declaration//GEN-END:variables
 }

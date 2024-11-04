@@ -58,6 +58,7 @@ public class Agendamento extends javax.swing.JFrame {
         CampoServico = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         CampoTelefone = new javax.swing.JFormattedTextField();
+        jVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -221,7 +222,20 @@ public class Agendamento extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        CampoTelefone.setText("(  )     -    ");
+
+        jVoltar.setBackground(new java.awt.Color(255, 255, 255));
+        jVoltar.setForeground(new java.awt.Color(0, 51, 51));
+        jVoltar.setText("Voltar");
+        jVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jVoltarMouseClicked(evt);
+            }
+        });
+        jVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -235,7 +249,9 @@ public class Agendamento extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(testarSQL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(butaoLimpar))
+                        .addComponent(butaoLimpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jVoltar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -312,7 +328,8 @@ public class Agendamento extends javax.swing.JFrame {
                     .addComponent(butaoCadastrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(testarSQL)
-                        .addComponent(butaoLimpar)))
+                        .addComponent(butaoLimpar)
+                        .addComponent(jVoltar)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
@@ -523,6 +540,17 @@ public class Agendamento extends javax.swing.JFrame {
         }   
     }//GEN-LAST:event_TabelaAgendamentoMouseClicked
 
+    private void jVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVoltarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jVoltarActionPerformed
+
+    private void jVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jVoltarMouseClicked
+         Inicio frameInicio = new Inicio();
+         frameInicio.setVisible(true);
+         this.dispose();
+        
+    }//GEN-LAST:event_jVoltarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -578,6 +606,7 @@ public class Agendamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jVoltar;
     private javax.swing.JButton testarSQL;
     // End of variables declaration//GEN-END:variables
 }

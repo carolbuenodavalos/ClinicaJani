@@ -43,6 +43,8 @@ public class Relatorio extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         CampoNome = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jVoltar = new javax.swing.JButton();
+        jVoltar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -90,6 +92,24 @@ public class Relatorio extends javax.swing.JFrame {
             }
         });
 
+        jVoltar.setBackground(new java.awt.Color(255, 255, 255));
+        jVoltar.setForeground(new java.awt.Color(0, 51, 51));
+        jVoltar.setText("Voltar");
+
+        jVoltar1.setBackground(new java.awt.Color(255, 255, 255));
+        jVoltar1.setForeground(new java.awt.Color(0, 51, 51));
+        jVoltar1.setText("Voltar");
+        jVoltar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jVoltar1MouseClicked(evt);
+            }
+        });
+        jVoltar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jVoltar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,9 +129,16 @@ public class Relatorio extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(CampoData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1))
+                                .addComponent(jButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jVoltar1))
                             .addComponent(jLabel2))))
                 .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jVoltar)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,10 +153,16 @@ public class Relatorio extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CampoData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jVoltar1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jVoltar)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -152,6 +185,17 @@ public class Relatorio extends javax.swing.JFrame {
         AgendamentoDao cadastroPessoaP = new AgendamentoDao();
         atualizaTabela(cadastroPessoaP);
     }//GEN-LAST:event_formWindowOpened
+
+    private void jVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jVoltar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jVoltar1ActionPerformed
+
+    private void jVoltar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jVoltar1MouseClicked
+            
+        Inicio frameInicio = new Inicio();
+        frameInicio.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jVoltar1MouseClicked
     
     private void atualizaTabela(AgendamentoDao cadastroPDao){
         try{
@@ -261,5 +305,7 @@ public class Relatorio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jVoltar;
+    private javax.swing.JButton jVoltar1;
     // End of variables declaration//GEN-END:variables
 }

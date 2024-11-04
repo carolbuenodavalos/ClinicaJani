@@ -140,9 +140,9 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-            //Agendamento frameAgendamento = new Agendamento();
-            //frameAgendamento.setVisible(true);
-            //this.dispose();        // TODO add your handling code here:
+            Agendamento frameAgendamento = new Agendamento();
+            frameAgendamento.setVisible(true);
+            this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
