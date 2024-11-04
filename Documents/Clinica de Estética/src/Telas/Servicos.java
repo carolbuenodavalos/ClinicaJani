@@ -41,6 +41,8 @@ public class Servicos extends javax.swing.JFrame {
         butaoExcluir = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaServicos = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        CampoProfissional = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -66,6 +68,11 @@ public class Servicos extends javax.swing.JFrame {
         });
 
         CampoServico.setBackground(new java.awt.Color(255, 255, 255));
+        CampoServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoServicoActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel5.setText("Serviços");
@@ -102,6 +109,15 @@ public class Servicos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(TabelaServicos);
 
+        jLabel1.setText("Nome do Profissional");
+
+        CampoProfissional.setBackground(new java.awt.Color(255, 255, 255));
+        CampoProfissional.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoProfissionalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,15 +125,21 @@ public class Servicos extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CampoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(butaoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CampoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(80, 80, 80)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(CampoProfissional, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,9 +147,13 @@ public class Servicos extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CampoServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CampoServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CampoProfissional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,6 +180,7 @@ public class Servicos extends javax.swing.JFrame {
                     ServicosModel cadastroP = new ServicosModel();
 
                     cadastroP.setServico(CampoServico.getText());
+                    cadastroP.setNomeProfissional(CampoProfissional.getText());
                     
                     ServicosDao cadastroPDao = new ServicosDao();
                     cadastroPDao.inserir(cadastroP);
@@ -169,6 +196,7 @@ public class Servicos extends javax.swing.JFrame {
                 ServicosModel cadastroP = new ServicosModel();
                 //cadastroP.setID(Integer.parseInt(CampoID.getText()));
                 cadastroP.setServico(CampoServico.getText());
+                cadastroP.setNomeProfissional(CampoProfissional.getText());
 
                 ServicosDao cadastroPDao = new ServicosDao();
                 cadastroPDao.alterar(cadastroP);
@@ -225,6 +253,14 @@ public class Servicos extends javax.swing.JFrame {
         ServicosDao attServicos = new ServicosDao();
         atualizaTabela(attServicos);
     }//GEN-LAST:event_formWindowOpened
+
+    private void CampoServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoServicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CampoServicoActionPerformed
+
+    private void CampoProfissionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoProfissionalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CampoProfissionalActionPerformed
     
     private void limparCampos(){
         //this.CampoID.setText("");
@@ -292,10 +328,12 @@ public class Servicos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField CampoProfissional;
     private javax.swing.JTextField CampoServico;
     private javax.swing.JTable TabelaServicos;
     private javax.swing.JButton butaoCadastrar;
     private javax.swing.JLabel butaoExcluir;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;

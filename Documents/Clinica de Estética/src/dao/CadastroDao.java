@@ -195,7 +195,6 @@ public class CadastroDao implements DaoGenerica<CadastroModel> {
     public ArrayList<CadastroModel> dashboard() {
         ArrayList<CadastroModel> ListarDashBoard = new ArrayList<CadastroModel>();
         String sql = "select count(idCliente) as numcad, count(idCliete)*2 as sumcad from cliente;";
-//        String sql = "select FLOOR(RAND()*(10-5+1)*10) as numcad, FLOOR(RAND()*(10-5+1)*10) as sumcad, FLOOR(RAND()*(10-5+1)*10) as numsexualidade";
         
         try
         {
@@ -211,9 +210,6 @@ public class CadastroDao implements DaoGenerica<CadastroModel> {
                 {
 
                     CadastroModel cadastro = new CadastroModel();
-                    //cadastro.setTotalCadastros(resultadoSentenca.getInt("numcad"));
-                    //cadastro.SetSomaCodigos(resultadoSentenca.getInt("sumcad"));
-                    //cadastro.SetNumSexualidade(resultadoSentenca.getInt("numsexualidade"));
                     
                     ListarDashBoard.add(cadastro);
                 }

@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import models.ServicosModel;
-import dao.DaoGenerica;
 /**
  *
  * @author marcu
@@ -27,14 +26,15 @@ public class ServicosDao implements DaoGenerica<ServicosModel>{
     
     @Override
     public void inserir(ServicosModel cadastro) {
-        String sql = "INSERT INTO Servicos (idServico, nomeServico) VALUES (?,?)";
-        //eu nn sei oq caralhos aconteceu q simplesmente pega "nomeProfissional" de algum lugar e simplesmnete nn cadastra, pfv alguem da uma luz
+        String sql = "INSERT INTO Servicos (nomeServico, nomeProfissional) VALUES (?,?)";
+
         try{
  
             if(this.conexao.conectar()){
                 PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
-                sentenca.setInt(1,cadastro.getID()); 
-                sentenca.setString(2,cadastro.getServico());             
+                sentenca.setString(1,cadastro.getServico());
+                sentenca.setString(2,cadastro.getNomeProfissional());             
+
                 sentenca.execute(); 
                 sentenca.close(); 
                 this.conexao.getConnection().close();

@@ -12,14 +12,16 @@ package models;
 public class ServicosModel {
     private int idServico;
     private String nomeServico;
+    private String nomeProfissional;
     
     
     public ServicosModel(){
     }
     
-    public ServicosModel (int idServico, String nomeServico){
+    public ServicosModel (int idServico, String nomeServico, String nomeProfissional){
         this.idServico = idServico;
         this.nomeServico = nomeServico;
+        this.nomeProfissional = nomeProfissional;
     }
     
     
@@ -37,5 +39,13 @@ public class ServicosModel {
     
     public void setServico(String nomeServico){
      this.nomeServico = nomeServico;
+    }
+    
+    public String getNomeProfissional() {
+        return nomeProfissional;
+    }
+
+    public void setNomeProfissional(String nomeProfissional) {
+        this.nomeProfissional = nomeProfissional;
     }
 }

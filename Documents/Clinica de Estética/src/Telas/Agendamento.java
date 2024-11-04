@@ -75,6 +75,11 @@ public class Agendamento extends javax.swing.JFrame {
         CampoID.setForeground(new java.awt.Color(153, 153, 153));
         CampoID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         CampoID.setBorder(null);
+        CampoID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoIDActionPerformed(evt);
+            }
+        });
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Nome");
@@ -471,6 +476,10 @@ public class Agendamento extends javax.swing.JFrame {
         CadastroDao attUsers = new CadastroDao();
         atualizaTabelaUsers(attUsers); 
     }//GEN-LAST:event_formWindowOpened
+
+    private void CampoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CampoIDActionPerformed
 
     /**
      * @param args the command line arguments
