@@ -59,6 +59,7 @@ public class Agendamento extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         CampoTelefone = new javax.swing.JFormattedTextField();
         jVoltar = new javax.swing.JButton();
+        jFormattedCampoData = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -198,11 +199,13 @@ public class Agendamento extends javax.swing.JFrame {
 
         CampoData.setBackground(new java.awt.Color(255, 255, 255));
         CampoData.setForeground(new java.awt.Color(0, 0, 0));
-        try {
-            CampoData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        CampoData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        CampoData.setAutoscrolls(false);
+        CampoData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoDataActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setText("Agendamento de Clientes");
@@ -237,53 +240,70 @@ public class Agendamento extends javax.swing.JFrame {
             }
         });
 
+        try {
+            jFormattedCampoData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedCampoData.setToolTipText("");
+        jFormattedCampoData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedCampoDataActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(testarSQL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(butaoLimpar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jVoltar))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(CampoData, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(jFormattedCampoData, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
-                            .addComponent(CampoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CampoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(254, 254, 254)
+                        .addComponent(CampoData, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(testarSQL)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(butaoLimpar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jVoltar))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(CampoID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(CampoID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(CampoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel5))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CampoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CampoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CampoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CampoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
+                                    .addComponent(CampoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))))))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -318,8 +338,10 @@ public class Agendamento extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jFormattedCampoData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(CampoHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(CampoData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(CampoHorario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(28, 28, 28)))
@@ -341,7 +363,7 @@ public class Agendamento extends javax.swing.JFrame {
     private void butaoCadastrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butaoCadastrarMouseClicked
        if(CampoCPF.getText().trim().isEmpty() || 
           CampoTelefone.getText().trim().isEmpty() || 
-          CampoData.getText().trim().isEmpty() || 
+          jFormattedCampoData.getText().trim().isEmpty() || 
           CampoHorario.getText().trim().isEmpty())
           {
                    JOptionPane.showMessageDialog(null, "Nenhum dado idendificado");
@@ -355,7 +377,7 @@ public class Agendamento extends javax.swing.JFrame {
                   cadastroP.setCpf(CampoCPF.getText());
                   cadastroP.setTelefone(CampoTelefone.getText());
                   cadastroP.setServico(CampoServico.getSelectedItem().toString());  
-                  cadastroP.setDataAgendamento(CampoData.getText());
+                  cadastroP.setDataAgendamento(jFormattedCampoData.getText());
                   cadastroP.setHorario(CampoHorario.getText());
                   
                   AgendamentoDao cadastroPDao = new AgendamentoDao();
@@ -374,7 +396,7 @@ public class Agendamento extends javax.swing.JFrame {
                   cadastroP.setCpf(CampoCPF.getText());
                   cadastroP.setTelefone(CampoTelefone.getText());
                   cadastroP.setServico(CampoServico.getSelectedItem().toString());  
-                  cadastroP.setDataAgendamento(CampoData.getText());
+                  cadastroP.setDataAgendamento(jFormattedCampoData.getText());
                   cadastroP.setHorario(CampoHorario.getText());
 
                 AgendamentoDao cadastroPDao = new AgendamentoDao();
@@ -420,7 +442,7 @@ public class Agendamento extends javax.swing.JFrame {
         this.CampoID.setText("");
         this.CampoCPF.setText("");
         this.CampoTelefone.setText("");
-        this.CampoData.setText("");
+        this.jFormattedCampoData.setText("");
         this.CampoHorario.setText("");
     }
   
@@ -532,7 +554,7 @@ public class Agendamento extends javax.swing.JFrame {
            CampoCPF.setText(TabelaAgendamento.getValueAt(TabelaAgendamento.getSelectedRow(),2).toString());
            CampoTelefone.setText(TabelaAgendamento.getValueAt(TabelaAgendamento.getSelectedRow(), 3).toString()); 
            CampoServico.setSelectedItem(TabelaAgendamento.getValueAt(TabelaAgendamento.getSelectedRow(),4).toString());
-           CampoData.setText(TabelaAgendamento.getValueAt(TabelaAgendamento.getSelectedRow(), 4).toString()); 
+           jFormattedCampoData.setText(TabelaAgendamento.getValueAt(TabelaAgendamento.getSelectedRow(), 4).toString()); 
            CampoHorario.setText(TabelaAgendamento.getValueAt(TabelaAgendamento.getSelectedRow(), 4).toString()); 
            contador = 1;
            TabelaAgendamento.enable(false);
@@ -550,6 +572,14 @@ public class Agendamento extends javax.swing.JFrame {
          this.dispose();
         
     }//GEN-LAST:event_jVoltarMouseClicked
+
+    private void CampoDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CampoDataActionPerformed
+
+    private void jFormattedCampoDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedCampoDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedCampoDataActionPerformed
 
     /**
      * @param args the command line arguments
@@ -597,6 +627,7 @@ public class Agendamento extends javax.swing.JFrame {
     private javax.swing.JTable TabelaAgendamento;
     private javax.swing.JButton butaoCadastrar;
     private javax.swing.JButton butaoLimpar;
+    private javax.swing.JFormattedTextField jFormattedCampoData;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;

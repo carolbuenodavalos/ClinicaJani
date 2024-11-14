@@ -182,6 +182,42 @@ public class AgendamentoDao implements DaoGenerica<AgendamentoModel>{
            throw new RuntimeException(ex);
         } 
     }
+    
+    public ArrayList<AgendamentoModel> consultarPorData(String data) {
+    ArrayList<AgendamentoModel> listaCadastrosStr = new ArrayList<>();
+    String sql = "SELECT c.idAgendamento, c.nome, c.cpf, c.telefone, c.horario, c.dataAgendamento " +
+                 "FROM agendamento AS c " +
+                 "WHERE c.dataAgendamento LIKE ? " +
+                 "ORDER BY c.nome";
+
+    try {
+        if (this.conexao.conectar()) {
+            PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
+            sentenca.setString(1, "%" + data + "%");
+            ResultSet resultadoSentenca = sentenca.executeQuery();
+
+            while (resultadoSentenca.next()) {
+                AgendamentoModel cadastro = new AgendamentoModel();
+                cadastro.setIdAgendamento(resultadoSentenca.getInt("idAgendamento"));
+                cadastro.setNome(resultadoSentenca.getString("nome"));
+                cadastro.setCpf(resultadoSentenca.getString("cpf"));
+                cadastro.setTelefone(resultadoSentenca.getString("telefone"));
+                cadastro.setHorario(resultadoSentenca.getString("horario"));
+                String dataString = resultadoSentenca.getString("dataAgendamento");
+                cadastro.setDataAgendamento(dataString);
+                listaCadastrosStr.add(cadastro);
+            }
+            sentenca.close();
+            this.conexao.getConnection().close();
+        }
+        return listaCadastrosStr;
+    } catch (SQLException ex) {
+        System.out.println("Erro ao executar a consulta SQL: " + ex.getMessage());
+        ex.printStackTrace();
+        throw new RuntimeException("Erro ao executar a consulta SQL", ex);
+    }
+}
+
 
     public void excluir() {
         String sql = "DELETE FROM agendamento";

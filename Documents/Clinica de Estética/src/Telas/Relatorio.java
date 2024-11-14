@@ -38,13 +38,12 @@ public class Relatorio extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaRelatorio = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        CampoData = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         CampoNome = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jVoltar = new javax.swing.JButton();
         jVoltar1 = new javax.swing.JButton();
+        CampoData = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -66,19 +65,16 @@ public class Relatorio extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Relatorio Kowalski");
 
-        CampoData.setBackground(new java.awt.Color(153, 153, 153));
-        CampoData.setText("  /  /    ");
-        CampoData.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CampoDataActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Data (WIP)");
 
         jLabel4.setText("Nome");
 
         CampoNome.setBackground(new java.awt.Color(153, 153, 153));
+        CampoNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoNomeActionPerformed(evt);
+            }
+        });
         CampoNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 CampoNomeKeyTyped(evt);
@@ -91,10 +87,11 @@ public class Relatorio extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
-
-        jVoltar.setBackground(new java.awt.Color(255, 255, 255));
-        jVoltar.setForeground(new java.awt.Color(0, 51, 51));
-        jVoltar.setText("Voltar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jVoltar1.setBackground(new java.awt.Color(255, 255, 255));
         jVoltar1.setForeground(new java.awt.Color(0, 51, 51));
@@ -107,6 +104,12 @@ public class Relatorio extends javax.swing.JFrame {
         jVoltar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jVoltar1ActionPerformed(evt);
+            }
+        });
+
+        CampoData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoDataActionPerformed(evt);
             }
         });
 
@@ -127,60 +130,60 @@ public class Relatorio extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(CampoData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(CampoData, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1)
                                 .addGap(18, 18, 18)
                                 .addComponent(jVoltar1))
                             .addComponent(jLabel2))))
                 .addContainerGap(34, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jVoltar)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CampoData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1)
-                    .addComponent(jVoltar1))
+                    .addComponent(jVoltar1)
+                    .addComponent(CampoData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jVoltar)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void CampoDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoDataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CampoDataActionPerformed
 
     private void CampoNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CampoNomeKeyTyped
         
     }//GEN-LAST:event_CampoNomeKeyTyped
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        AgendamentoDao cadastroPDao = new AgendamentoDao();        
+        //int vld=0;
+        if(!CampoNome.getText().trim().isEmpty()){
+            //vld=1;
+            AgendamentoDao cadastroPDao = new AgendamentoDao();        
         buscarNome(cadastroPDao);
+
+       } else if(!CampoData.getText().trim().isEmpty()){
+           //vld=1;
+        AgendamentoDao cadastroPDao = new AgendamentoDao();        
+        buscarData(cadastroPDao);
+       }else{
+           JOptionPane.showMessageDialog(null, "Nenhum dado idendificado");
+       }
+
     }//GEN-LAST:event_jButton1MouseClicked
 
+ 
+        
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         AgendamentoDao cadastroPessoaP = new AgendamentoDao();
         atualizaTabela(cadastroPessoaP);
@@ -196,6 +199,18 @@ public class Relatorio extends javax.swing.JFrame {
         frameInicio.setVisible(true);
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jVoltar1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void CampoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CampoNomeActionPerformed
+
+    private void CampoDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CampoDataActionPerformed
     
     private void atualizaTabela(AgendamentoDao cadastroPDao){
         try{
@@ -259,6 +274,34 @@ public class Relatorio extends javax.swing.JFrame {
             }
       
     }
+private void buscarData(AgendamentoDao cadastroPDao) {
+    try {
+        limparTabela();
+
+        // Obtém a data do JTextField como string
+        String dataString = CampoData.getText();
+
+        ArrayList<AgendamentoModel> listaUsuariosStr;
+        listaUsuariosStr = cadastroPDao.consultarPorData(dataString);
+
+        // Resgata o modelo da tabela
+        DefaultTableModel modeloTabela = (DefaultTableModel) TabelaRelatorio.getModel();
+
+        for (AgendamentoModel cadastroP : listaUsuariosStr) {
+
+            modeloTabela.addRow(new String[]{
+                Integer.toString(cadastroP.getIdAgendamento()), 
+                cadastroP.getNome(), 
+                cadastroP.getDataAgendamento(),
+                cadastroP.getHorario()
+            });
+        }
+
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado:\n" + ex.getMessage(), "ERRO!", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
         
     /**
      * @param args the command line arguments
@@ -296,7 +339,7 @@ public class Relatorio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField CampoData;
+    private javax.swing.JTextField CampoData;
     private javax.swing.JTextField CampoNome;
     private javax.swing.JTable TabelaRelatorio;
     private javax.swing.JButton jButton1;
@@ -304,7 +347,6 @@ public class Relatorio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jVoltar;
     private javax.swing.JButton jVoltar1;
     // End of variables declaration//GEN-END:variables
 }
