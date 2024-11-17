@@ -23,6 +23,8 @@ public class Servicos extends javax.swing.JFrame {
      */
     public Servicos() {
         initComponents();
+        getContentPane().setBackground(new java.awt.Color(255, 204,255));
+
     }
 
     /**
@@ -52,11 +54,12 @@ public class Servicos extends javax.swing.JFrame {
             }
         });
 
-        butaoCadastrar.setBackground(new java.awt.Color(255, 255, 255));
-        butaoCadastrar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        butaoCadastrar.setForeground(new java.awt.Color(0, 0, 0));
-        butaoCadastrar.setText("Cadastrar");
-        butaoCadastrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 255, 255), 5, true));
+        butaoCadastrar.setBackground(new java.awt.Color(204, 102, 255));
+        butaoCadastrar.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        butaoCadastrar.setForeground(new java.awt.Color(255, 255, 255));
+        butaoCadastrar.setText("CADASTRAR");
+        butaoCadastrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 255), 5, true));
+        butaoCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         butaoCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 butaoCadastrarMouseClicked(evt);
@@ -69,17 +72,20 @@ public class Servicos extends javax.swing.JFrame {
         });
 
         CampoServico.setBackground(new java.awt.Color(255, 255, 255));
+        CampoServico.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 255), 3, true));
         CampoServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CampoServicoActionPerformed(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel5.setText("Serviços");
+        jLabel5.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 2, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel5.setText("SERVIÇOS");
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel2.setText("Nome do Serviço");
+        jLabel2.setText("Nome do Serviço :");
 
         butaoExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -87,6 +93,9 @@ public class Servicos extends javax.swing.JFrame {
             }
         });
 
+        TabelaServicos.setBackground(new java.awt.Color(204, 204, 255));
+        TabelaServicos.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
+        TabelaServicos.setForeground(new java.awt.Color(102, 102, 102));
         TabelaServicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -103,6 +112,9 @@ public class Servicos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        TabelaServicos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        TabelaServicos.setSelectionBackground(new java.awt.Color(255, 204, 255));
+        TabelaServicos.setSelectionForeground(new java.awt.Color(51, 51, 51));
         TabelaServicos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabelaServicosMouseClicked(evt);
@@ -110,18 +122,22 @@ public class Servicos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(TabelaServicos);
 
-        jLabel1.setText("Nome do Profissional");
+        jLabel1.setText("Nome do Profissional :");
 
         CampoProfissional.setBackground(new java.awt.Color(255, 255, 255));
+        CampoProfissional.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 255), 3, true));
         CampoProfissional.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CampoProfissionalActionPerformed(evt);
             }
         });
 
-        jVoltar.setBackground(new java.awt.Color(255, 255, 255));
-        jVoltar.setForeground(new java.awt.Color(0, 51, 51));
-        jVoltar.setText("Voltar");
+        jVoltar.setBackground(new java.awt.Color(204, 102, 255));
+        jVoltar.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
+        jVoltar.setForeground(new java.awt.Color(255, 255, 255));
+        jVoltar.setText("VOLTAR");
+        jVoltar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 255), 3, true));
+        jVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jVoltarMouseClicked(evt);
@@ -138,26 +154,29 @@ public class Servicos extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(butaoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
-                        .addComponent(jVoltar))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CampoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(80, 80, 80)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(CampoProfissional, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jLabel5)
+                            .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(CampoServico, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CampoProfissional, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)))
+                .addComponent(butaoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,9 +192,7 @@ public class Servicos extends javax.swing.JFrame {
                     .addComponent(CampoServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CampoProfissional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jVoltar))
+                .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(116, 116, 116)
@@ -183,7 +200,9 @@ public class Servicos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
 
         pack();
