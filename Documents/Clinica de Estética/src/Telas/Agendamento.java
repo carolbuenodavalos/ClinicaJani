@@ -76,7 +76,7 @@ public class Agendamento extends javax.swing.JFrame {
         jLabel1.setText("ID do Cliente");
 
         CampoID.setEditable(false);
-        CampoID.setBackground(new java.awt.Color(204, 204, 204));
+        CampoID.setBackground(new java.awt.Color(204, 153, 255));
         CampoID.setForeground(new java.awt.Color(153, 153, 153));
         CampoID.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         CampoID.setBorder(null);
