@@ -6,11 +6,16 @@ package Telas;
 
 import dao.CadastroDao;
 import dao.ServicosDao;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import models.CadastroModel;
 
 /**
@@ -24,7 +29,17 @@ public class Cadastro extends javax.swing.JFrame {
      */
     public Cadastro() {
         initComponents();
+        tHeader();
+
         getContentPane().setBackground(new java.awt.Color(255, 204,255));
+        TabelaUsuarios.getColumnModel().getColumn(0).setPreferredWidth(40);
+        TabelaUsuarios.getColumnModel().getColumn(1).setPreferredWidth(150);
+        TabelaUsuarios.getColumnModel().getColumn(2).setPreferredWidth(100);
+        TabelaUsuarios.getColumnModel().getColumn(3).setPreferredWidth(120);
+                
+
+        TabelaUsuarios.getTableHeader().setFont(new Font("Segoe UI light", Font.BOLD, 14));
+
 
     }
 
@@ -40,9 +55,7 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         CampoNome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        CampoCPF = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        CampoTelefone = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TabelaUsuarios = new javax.swing.JTable();
@@ -53,6 +66,8 @@ public class Cadastro extends javax.swing.JFrame {
         campoBuscar = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jVoltar = new javax.swing.JButton();
+        CampoCPF = new javax.swing.JFormattedTextField();
+        CampoTelefone = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -67,32 +82,16 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel1.setText("ID");
 
         CampoNome.setBackground(new java.awt.Color(255, 255, 255));
-        CampoNome.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 204, 255)));
+        CampoNome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 255), 5));
         CampoNome.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel2.setText("Nome");
 
-        CampoCPF.setBackground(new java.awt.Color(255, 255, 255));
-        CampoCPF.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 204, 255)));
-        CampoCPF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CampoCPFActionPerformed(evt);
-            }
-        });
-
         jLabel3.setBackground(new java.awt.Color(102, 102, 102));
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         jLabel3.setText("CPF");
-
-        CampoTelefone.setBackground(new java.awt.Color(255, 255, 255));
-        CampoTelefone.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 204, 255)));
-        CampoTelefone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CampoTelefoneActionPerformed(evt);
-            }
-        });
 
         jLabel4.setBackground(new java.awt.Color(102, 102, 102));
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
@@ -108,17 +107,42 @@ public class Cadastro extends javax.swing.JFrame {
             new String [] {
                 "ID", "Nome", "CPF", "Telefone"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TabelaUsuarios.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         TabelaUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        TabelaUsuarios.setSelectionBackground(new java.awt.Color(255, 204, 255));
-        TabelaUsuarios.setSelectionForeground(new java.awt.Color(51, 51, 51));
+        TabelaUsuarios.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        TabelaUsuarios.setFocusable(false);
+        TabelaUsuarios.setGridColor(new java.awt.Color(102, 102, 102));
+        TabelaUsuarios.setOpaque(false);
+        TabelaUsuarios.setSelectionBackground(new java.awt.Color(204, 102, 255));
+        TabelaUsuarios.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        TabelaUsuarios.setShowGrid(true);
+        TabelaUsuarios.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                TabelaUsuariosComponentAdded(evt);
+            }
+        });
         jScrollPane1.setViewportView(TabelaUsuarios);
+        if (TabelaUsuarios.getColumnModel().getColumnCount() > 0) {
+            TabelaUsuarios.getColumnModel().getColumn(0).setResizable(false);
+            TabelaUsuarios.getColumnModel().getColumn(1).setResizable(false);
+            TabelaUsuarios.getColumnModel().getColumn(2).setResizable(false);
+            TabelaUsuarios.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         butaoCadastrar.setBackground(new java.awt.Color(204, 102, 255));
         butaoCadastrar.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         butaoCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         butaoCadastrar.setText("CADASTRAR");
-        butaoCadastrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 255), 5, true));
+        butaoCadastrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 255), 7));
         butaoCadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         butaoCadastrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -135,7 +159,7 @@ public class Cadastro extends javax.swing.JFrame {
         butaoLimpar.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         butaoLimpar.setForeground(new java.awt.Color(255, 255, 255));
         butaoLimpar.setText("LIMPAR CAMPOS");
-        butaoLimpar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 255), 3, true));
+        butaoLimpar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 255), 7));
         butaoLimpar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         butaoLimpar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -151,8 +175,13 @@ public class Cadastro extends javax.swing.JFrame {
         CampoID.setEditable(false);
         CampoID.setBackground(new java.awt.Color(204, 153, 255));
         CampoID.setForeground(new java.awt.Color(204, 204, 204));
-        CampoID.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 204, 255)));
+        CampoID.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 255), 5));
         CampoID.setFocusable(false);
+        CampoID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoIDActionPerformed(evt);
+            }
+        });
 
         jLabel5.setBackground(new java.awt.Color(102, 102, 102));
         jLabel5.setFont(new java.awt.Font("Segoe UI Light", 2, 24)); // NOI18N
@@ -180,7 +209,7 @@ public class Cadastro extends javax.swing.JFrame {
         jVoltar.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jVoltar.setForeground(new java.awt.Color(255, 255, 255));
         jVoltar.setText("VOLTAR");
-        jVoltar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 255), 3, true));
+        jVoltar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 255), 7, true));
         jVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -193,81 +222,101 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
+        CampoCPF.setBackground(new java.awt.Color(255, 255, 255));
+        CampoCPF.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 255), 5, true));
+        try {
+            CampoCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        CampoCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoCPFActionPerformed(evt);
+            }
+        });
+
+        CampoTelefone.setBackground(new java.awt.Color(255, 255, 255));
+        CampoTelefone.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 255), 5, true));
+        try {
+            CampoTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(campoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(170, 170, 170))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(361, 361, 361)))
                     .addComponent(jLabel5)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CampoID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(CampoNome)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(CampoID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 32, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(40, 40, 40)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(CampoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(CampoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CampoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addComponent(butaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(24, 24, 24))
+                            .addComponent(jLabel4)
+                            .addComponent(CampoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(butaoLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(420, 420, 420)
+                        .addComponent(jVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel5)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CampoID)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(CampoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(CampoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(butaoLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(butaoLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CampoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CampoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CampoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CampoNome))
                 .addGap(18, 18, 18)
                 .addComponent(butaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel12)
-                .addGap(2, 2, 2)
-                .addComponent(campoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addComponent(campoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -424,9 +473,14 @@ public class Cadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CampoCPFActionPerformed
 
-    private void CampoTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoTelefoneActionPerformed
+    private void TabelaUsuariosComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_TabelaUsuariosComponentAdded
         // TODO add your handling code here:
-    }//GEN-LAST:event_CampoTelefoneActionPerformed
+
+    }//GEN-LAST:event_TabelaUsuariosComponentAdded
+
+    private void CampoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CampoIDActionPerformed
     
     private void limparCampos(){
         this.CampoID.setText("");
@@ -434,6 +488,30 @@ public class Cadastro extends javax.swing.JFrame {
         this.CampoCPF.setText("");
         this.CampoTelefone.setText("");
         }
+    
+    private void tHeader(){
+    
+        JTableHeader thead = TabelaUsuarios.getTableHeader();
+        thead.setOpaque(true);
+        thead.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        thead.setBackground(new Color(144,5,178));
+        thead.setForeground(Color.black);
+        
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setOpaque(false);
+        headerRenderer.setForeground(Color.WHITE);
+
+        //headerRenderer.setBackground(new Color(204,102,255));
+
+        //headerRenderer.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        for (int i = 0; i < TabelaUsuarios.getModel().getColumnCount(); i++) {
+    TabelaUsuarios.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+}
+    
+    
+    };
     /**
      * @param args the command line arguments
      */
@@ -470,10 +548,10 @@ public class Cadastro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField CampoCPF;
+    private javax.swing.JFormattedTextField CampoCPF;
     private javax.swing.JTextField CampoID;
     private javax.swing.JTextField CampoNome;
-    private javax.swing.JTextField CampoTelefone;
+    private javax.swing.JFormattedTextField CampoTelefone;
     private javax.swing.JTable TabelaUsuarios;
     private javax.swing.JButton butaoCadastrar;
     private javax.swing.JButton butaoLimpar;
