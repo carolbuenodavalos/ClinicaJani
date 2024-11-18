@@ -6,10 +6,15 @@ package Telas;
 
 import dao.AgendamentoDao;
 import dao.CadastroDao;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import models.AgendamentoModel;
 import models.CadastroModel;
 
@@ -25,6 +30,7 @@ public class Relatorio extends javax.swing.JFrame {
     public Relatorio() {
         initComponents();
         getContentPane().setBackground(new java.awt.Color(255, 204,255));
+        tHeader();
 
     }
 
@@ -66,10 +72,11 @@ public class Relatorio extends javax.swing.JFrame {
             }
         ));
         TabelaRelatorio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        TabelaRelatorio.setGridColor(new java.awt.Color(255, 204, 255));
+        TabelaRelatorio.setGridColor(new java.awt.Color(153, 153, 153));
         TabelaRelatorio.setSelectionBackground(new java.awt.Color(255, 204, 255));
         TabelaRelatorio.setSelectionForeground(new java.awt.Color(51, 51, 51));
-        TabelaRelatorio.setShowGrid(false);
+        TabelaRelatorio.setShowGrid(true);
+        TabelaRelatorio.setSurrendersFocusOnKeystroke(true);
         jScrollPane1.setViewportView(TabelaRelatorio);
 
         jLabel1.setBackground(new java.awt.Color(102, 102, 102));
@@ -330,11 +337,30 @@ private void buscarData(AgendamentoDao cadastroPDao) {
     }
 }
 
+         private void tHeader(){
+    
+        JTableHeader thead = TabelaRelatorio.getTableHeader();
+        thead.setOpaque(true);
+        thead.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        thead.setBackground(new Color(144,5,178));
+        thead.setForeground(Color.black);
         
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        headerRenderer.setOpaque(false);
+        headerRenderer.setForeground(Color.WHITE);
+
+        headerRenderer.setBackground(new Color(204,102,255));
+
+        headerRenderer.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        for (int i = 0; i < TabelaRelatorio.getModel().getColumnCount(); i++) {
+    TabelaRelatorio.getColumnModel().getColumn(i).setHeaderRenderer(headerRenderer);
+}
+         }
+ 
+         
+         public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
