@@ -177,7 +177,6 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="AGENDAMENTO"/>
-            <Property name="actionCommand" type="java.lang.String" value="AGENDAMENTO"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder thickness="5">
@@ -256,7 +255,7 @@
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Telas/Design_sem_nome-removebg-preview (2).png"/>
+              <Image iconType="2" name="C:\Users\mboch\OneDrive\Boletos\NetBeansProjects\ClinicaJani\Documents\Clinica de Est&#xe9;tica\src\Telas\Design_sem_nome-removebg-preview (2).png"/>
             </Property>
           </Properties>
         </Component>

@@ -68,7 +68,7 @@ public class Relatorio extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome do Cliente", "Data", "Horário"
+                "ID", "Nome do Cliente", "Data", "Horário", "Serviço"
             }
         ));
         TabelaRelatorio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -299,7 +299,8 @@ public class Relatorio extends javax.swing.JFrame {
                 modeloTabela.addRow(new String[]{Integer.toString(cadastroP.getIdAgendamento()), 
                                                                       cadastroP.getNome(), 
                                                                       cadastroP.getDataAgendamento(), 
-                                                                      cadastroP.getHorario()});
+                                                                      cadastroP.getHorario(),
+                                                                      cadastroP.getServico()});
                 }
 
             }
@@ -328,7 +329,8 @@ private void buscarData(AgendamentoDao cadastroPDao) {
                 Integer.toString(cadastroP.getIdAgendamento()), 
                 cadastroP.getNome(), 
                 cadastroP.getDataAgendamento(),
-                cadastroP.getHorario()
+                cadastroP.getHorario(),
+                cadastroP.getServico()
             });
         }
 

@@ -106,7 +106,7 @@ public class AgendamentoDao implements DaoGenerica<AgendamentoModel>{
     public ArrayList<AgendamentoModel> consultar() {
         
         ArrayList<AgendamentoModel> listaCadastros = new ArrayList<AgendamentoModel>();
-        String sql = "SELECT c.idAgendamento, c.nome, c.cpf, c.telefone, c.horario, c.dataAgendamento "+
+        String sql = "SELECT c.idAgendamento, c.nome, c.cpf, c.telefone, c.horario, c.dataAgendamento, c.servico "+
                      "FROM agendamento as c "+
                      "ORDER BY c.idAgendamento";
         try
@@ -125,6 +125,7 @@ public class AgendamentoDao implements DaoGenerica<AgendamentoModel>{
                     cadastro.setTelefone(resultadoSentenca.getString("telefone"));
                     cadastro.setHorario(resultadoSentenca.getString("horario"));
                     cadastro.setDataAgendamento(resultadoSentenca.getString("dataAgendamento"));
+                    cadastro.setServico(resultadoSentenca.getString("servico"));
                     
                     
                     
@@ -144,7 +145,7 @@ public class AgendamentoDao implements DaoGenerica<AgendamentoModel>{
     }
     public ArrayList<AgendamentoModel> consultar(String str) {
         ArrayList<AgendamentoModel> listaCadastrosStr = new ArrayList<AgendamentoModel>();
-         String sql = "SELECT c.idAgendamento, c.nome, c.cpf, c.telefone, c.horario, c.dataAgendamento " +
+         String sql = "SELECT c.idAgendamento, c.nome, c.cpf, c.telefone, c.horario, c.dataAgendamento, c.servico " +
                  "FROM agendamento AS c " +
                  "WHERE UPPER(c.nome) LIKE UPPER(?) " +
                  "ORDER BY c.nome";
@@ -167,6 +168,7 @@ public class AgendamentoDao implements DaoGenerica<AgendamentoModel>{
                     cadastro.setTelefone(resultadoSentenca.getString("telefone"));
                     cadastro.setHorario(resultadoSentenca.getString("horario"));
                     cadastro.setDataAgendamento(resultadoSentenca.getString("dataAgendamento"));
+                     cadastro.setServico(resultadoSentenca.getString("servico"));
                     
                     listaCadastrosStr.add(cadastro);
                 }
@@ -185,7 +187,7 @@ public class AgendamentoDao implements DaoGenerica<AgendamentoModel>{
     
     public ArrayList<AgendamentoModel> consultarPorData(String data) {
     ArrayList<AgendamentoModel> listaCadastrosStr = new ArrayList<>();
-    String sql = "SELECT c.idAgendamento, c.nome, c.cpf, c.telefone, c.horario, c.dataAgendamento " +
+    String sql = "SELECT c.idAgendamento, c.nome, c.cpf, c.telefone, c.horario, c.dataAgendamento, c.servico " +
                  "FROM agendamento AS c " +
                  "WHERE c.dataAgendamento LIKE ? " +
                  "ORDER BY c.nome";
@@ -204,6 +206,7 @@ public class AgendamentoDao implements DaoGenerica<AgendamentoModel>{
                 cadastro.setTelefone(resultadoSentenca.getString("telefone"));
                 cadastro.setHorario(resultadoSentenca.getString("horario"));
                 String dataString = resultadoSentenca.getString("dataAgendamento");
+                cadastro.setServico(resultadoSentenca.getString("servico"));
                 cadastro.setDataAgendamento(dataString);
                 listaCadastrosStr.add(cadastro);
             }

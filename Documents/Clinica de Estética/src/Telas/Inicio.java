@@ -81,7 +81,6 @@ public class Inicio extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("AGENDAMENTO");
-        jButton2.setActionCommand("AGENDAMENTO");
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 255), 5));
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setFocusable(false);
@@ -132,7 +131,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Telas/Design_sem_nome-removebg-preview (2).png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\mboch\\OneDrive\\Boletos\\NetBeansProjects\\ClinicaJani\\Documents\\Clinica de Estética\\src\\Telas\\Design_sem_nome-removebg-preview (2).png")); // NOI18N
 
         jPanel3.setBackground(new java.awt.Color(204, 102, 255));
 
